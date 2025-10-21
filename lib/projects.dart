@@ -1,7 +1,5 @@
-import 'package:digitechedge/slide_button.dart';
 import 'package:digitechedge/underline.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class ProjectsPage extends StatelessWidget {
   const ProjectsPage({super.key});
@@ -16,8 +14,16 @@ class ProjectsPage extends StatelessWidget {
         bool isDesktop = width >= 1024;
 
         // Responsive text sizes
-        double titleSize = isMobile ? 22 : isTablet ? 26 : 32;
-        double subtitleSize = isMobile ? 14 : isTablet ? 16 : 18;
+        double titleSize = isMobile
+            ? 22
+            : isTablet
+            ? 26
+            : 32;
+        double subtitleSize = isMobile
+            ? 14
+            : isTablet
+            ? 16
+            : 18;
         double buttonFontSize = isMobile ? 14 : 16;
 
         // Padding
@@ -40,10 +46,7 @@ class ProjectsPage extends StatelessWidget {
               Text(
                 "Browse Through Our Works",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: subtitleSize,
-                  color: Colors.black87,
-                ),
+                style: TextStyle(fontSize: subtitleSize, color: Colors.black87),
               ),
               const SizedBox(height: 20),
 
@@ -72,9 +75,7 @@ class ProjectsPage extends StatelessWidget {
 
               // Animation instead of image
               isMobile
-                  ? Column(
-                      children: _buildProjectAnimations(),
-                    )
+                  ? Column(children: _buildProjectAnimations())
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: _buildProjectAnimations()
@@ -93,7 +94,7 @@ class ProjectsPage extends StatelessWidget {
     return [
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.asset('lib/images/devices.jpg')
+        child: Image.asset('lib/images/devices.jpg'),
       ),
     ];
   }

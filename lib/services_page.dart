@@ -15,10 +15,26 @@ class ServicesPage extends StatelessWidget {
         bool isDesktop = width >= 1024;
 
         // responsive text sizes
-        double titleSize = isMobile ? 22 : isTablet ? 26 : 32;
-        double subtitleSize = isMobile ? 14 : isTablet ? 16 : 18;
-        double headingSize = isMobile ? 24 : isTablet ? 28 : 34;
-        double subHeadingSize = isMobile ? 16 : isTablet ? 18 : 20;
+        double titleSize = isMobile
+            ? 22
+            : isTablet
+            ? 26
+            : 32;
+        double subtitleSize = isMobile
+            ? 14
+            : isTablet
+            ? 16
+            : 18;
+        double headingSize = isMobile
+            ? 24
+            : isTablet
+            ? 28
+            : 34;
+        double subHeadingSize = isMobile
+            ? 16
+            : isTablet
+            ? 18
+            : 20;
 
         // padding
         EdgeInsets sectionPadding = isMobile
@@ -26,9 +42,15 @@ class ServicesPage extends StatelessWidget {
             : const EdgeInsets.symmetric(horizontal: 60, vertical: 40);
 
         // reusable service item widget
-        Widget buildServiceItem(String title, String description, IconData icon) {
+        Widget buildServiceItem(
+          String title,
+          String description,
+          IconData icon,
+        ) {
           return Container(
-            width: isDesktop ? (width / 2) - 80 : double.infinity, // 2 per row on desktop
+            width: isDesktop
+                ? (width / 2) - 80
+                : double.infinity, // 2 per row on desktop
             margin: const EdgeInsets.only(bottom: 25),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
