@@ -94,7 +94,7 @@ class ProjectsPage extends StatelessWidget {
     return [
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.asset('lib/images/devices.jpg'),
+        child: Image.asset('assets/images/devices.jpg'),
       ),
     ];
   }

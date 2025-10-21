@@ -35,33 +35,41 @@ class OurClients extends StatelessWidget {
               childAspectRatio: isMobile ? 1.1 : 1.6,
               physics: const NeverScrollableScrollPhysics(), // disables scroll
               children: const [
-                ClientCard(
-                  number: "01.",
-                  title: "CyberSecurity Trends",
-                  description:
-                      "Protect your digital assets with insights on current threats and learn from the best defense mechanisms.",
-                  imagePath: "lib/images/cybersecurity image.jpeg",
+                SingleChildScrollView(
+                  child: ClientCard(
+                    number: "01.",
+                    title: "CyberSecurity Trends",
+                    description:
+                        "Protect your digital assets with insights on current threats and learn from the best defense mechanisms.",
+                    imagePath: "assets/images/cybersecurity image.jpeg",
+                  ),
                 ),
-                ClientCard(
-                  number: "02.",
-                  title: "Tech Guides",
-                  description:
-                      "Stay updated on emerging technology trends to remain competitive.",
-                  imagePath: "lib/images/tech guides.jpeg",
+                SingleChildScrollView(
+                  child: ClientCard(
+                    number: "02.",
+                    title: "Tech Guides",
+                    description:
+                        "Stay updated on emerging technology trends to remain competitive.",
+                    imagePath: "assets/images/tech guides.jpeg",
+                  ),
                 ),
-                ClientCard(
-                  number: "03.",
-                  title: "IT Career Advice",
-                  description:
-                      "Discover strategies to grow your IT career with expert guidance and advice.",
-                  imagePath: "lib/images/itcareer.webp",
+                SingleChildScrollView(
+                  child: ClientCard(
+                    number: "03.",
+                    title: "IT Career Advice",
+                    description:
+                        "Discover strategies to grow your IT career with expert guidance and advice.",
+                    imagePath: "assets/images/itcareer.webp",
+                  ),
                 ),
-                ClientCard(
-                  number: "04.",
-                  title: "Cloud Computing",
-                  description:
-                      "Cloud innovations are transforming the tech world — adaptability is key.",
-                  imagePath: "lib/images/cloud computing.png",
+                SingleChildScrollView(
+                  child: ClientCard(
+                    number: "04.",
+                    title: "Cloud Computing",
+                    description:
+                        "Cloud innovations are transforming the tech world — adaptability is key.",
+                    imagePath: "assets/images/cloud computing.png",
+                  ),
                 ),
               ],
             ),

@@ -31,11 +31,8 @@ class ResponsivePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
-      appBar: AppBar(
-        
-        title: const Text('Responsive App'),
-      ),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(title: const Text('Responsive App')),
       body: LayoutBuilder(
         builder: (context, constraints) {
           // DESKTOP
