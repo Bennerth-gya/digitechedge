@@ -1,3 +1,5 @@
+import 'package:digitechedge/clients_review.dart';
+import 'package:digitechedge/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:digitechedge/ourclients.dart';
 import 'package:digitechedge/letushelpyou.dart';
@@ -20,8 +22,14 @@ class HomePage extends StatelessWidget {
             ServicesPage(),
             ProjectsPage(), // 👈 this one now has fixed height
             LetUsHelpYou(),
+            SizedBox(height: 30),
             StatsSection(),
+            SizedBox(height: 30),
             OurClients(),
+            SizedBox(height: 20),
+            ClientReviews(),
+            SizedBox(height: 30),
+            FooterSection(),
           ],
         ),
       ),

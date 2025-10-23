@@ -1,164 +1,213 @@
 import 'package:flutter/material.dart';
+import 'underline.dart'; // optional if you use your custom underline widget
 
 class OurClients extends StatelessWidget {
   const OurClients({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    bool isMobile = width < 600;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double width = constraints.maxWidth;
+        bool isMobile = width < 600;
+        bool isTablet = width >= 600 && width < 1024;
+        bool isDesktop = width >= 1024;
 
-    return Container(
-      // 👇 Increased height to remove overflow (Option 3)
-      height: isMobile ? 1200 : 1000, // adjust as needed
-      width: double.infinity,
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Section title
-          const Text(
-            "Our Clients",
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10),
-          Container(height: 3, width: 80, color: Colors.black),
-          const SizedBox(height: 30),
+        // Font sizes
+        double numberSize = isMobile
+            ? 18
+            : isTablet
+            ? 20
+            : 22;
+        double titleSize = isMobile
+            ? 18
+            : isTablet
+            ? 20
+            : 22;
+        double descriptionSize = isMobile
+            ? 14
+            : isTablet
+            ? 16
+            : 16;
 
-          // Client cards
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: isMobile ? 1 : 2, // 1 per row for mobile
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
-              childAspectRatio: isMobile ? 1.1 : 1.6,
-              physics: const NeverScrollableScrollPhysics(), // disables scroll
-              children: const [
-                SingleChildScrollView(
-                  child: ClientCard(
-                    number: "01.",
-                    title: "CyberSecurity Trends",
-                    description:
-                        "Protect your digital assets with insights on current threats and learn from the best defense mechanisms.",
-                    imagePath: "assets/images/cybersecurity image.jpeg",
-                  ),
-                ),
-                SingleChildScrollView(
-                  child: ClientCard(
-                    number: "02.",
-                    title: "Tech Guides",
-                    description:
-                        "Stay updated on emerging technology trends to remain competitive.",
-                    imagePath: "assets/images/tech guides.jpeg",
-                  ),
-                ),
-                SingleChildScrollView(
-                  child: ClientCard(
-                    number: "03.",
-                    title: "IT Career Advice",
-                    description:
-                        "Discover strategies to grow your IT career with expert guidance and advice.",
-                    imagePath: "assets/images/itcareer.webp",
-                  ),
-                ),
-                SingleChildScrollView(
-                  child: ClientCard(
-                    number: "04.",
-                    title: "Cloud Computing",
-                    description:
-                        "Cloud innovations are transforming the tech world — adaptability is key.",
-                    imagePath: "assets/images/cloud computing.png",
-                  ),
+        // Padding
+        EdgeInsets sectionPadding = isMobile
+            ? const EdgeInsets.all(16)
+            : const EdgeInsets.symmetric(horizontal: 60, vertical: 40);
+
+        // Reusable client card widget
+        Widget buildClientItem(
+          String number,
+          String title,
+          String description,
+          String imagePath, {
+          bool expand = false,
+        }) {
+          Widget item = Container(
+            margin: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ClientCard extends StatelessWidget {
-  final String number;
-  final String title;
-  final String description;
-  final String imagePath;
-
-  const ClientCard({
-    super.key,
-    required this.number,
-    required this.title,
-    required this.description,
-    required this.imagePath,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            number,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.blue,
-            ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-              height: 150,
-              width: double.infinity,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            description,
-            style: const TextStyle(fontSize: 14, color: Colors.black87),
-          ),
-          const SizedBox(height: 10),
-          InkWell(
-            onTap: () {},
-            child: const Row(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Read More",
+                  number,
                   style: TextStyle(
+                    fontSize: numberSize,
+                    fontWeight: FontWeight.bold,
                     color: Colors.blue,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: titleSize,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 5),
-                Icon(Icons.arrow_right_alt, color: Colors.blue),
+                const SizedBox(height: 10),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.cover,
+                    height: 150,
+                    width: double.infinity,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: descriptionSize,
+                    color: Colors.black87,
+                    height: 1.4,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                InkWell(
+                  onTap: () {},
+                  child: const Row(
+                    children: [
+                      Text(
+                        "Read More",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Icon(Icons.arrow_right_alt, color: Colors.blue),
+                    ],
+                  ),
+                ),
               ],
             ),
+          );
+
+          return expand ? Expanded(child: item) : item;
+        }
+
+        // Build main section
+        return Container(
+          width: double.infinity,
+          padding: sectionPadding,
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 6),
+              const Text(
+                "Our Clients",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(height: 3, width: 80, color: Colors.blue),
+              const SizedBox(height: 40),
+
+              // Responsive Layout
+              if (isDesktop)
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildClientItem(
+                      "01.",
+                      "CyberSecurity Trends",
+                      "Protect your digital assets with insights on current threats and learn from the best defense mechanisms.",
+                      "assets/images/cybersecurity image.jpeg",
+                      expand: true,
+                    ),
+                    buildClientItem(
+                      "02.",
+                      "Tech Guides",
+                      "Stay updated on emerging technology trends to remain competitive.",
+                      "assets/images/tech guides.jpeg",
+                      expand: true,
+                    ),
+                    buildClientItem(
+                      "03.",
+                      "IT Career Advice",
+                      "Discover strategies to grow your IT career with expert guidance and advice.",
+                      "assets/images/itcareer.webp",
+                      expand: true,
+                    ),
+                    buildClientItem(
+                      "04.",
+                      "Cloud Computing",
+                      "Cloud innovations are transforming the tech world — adaptability is key.",
+                      "assets/images/cloud computing.png",
+                      expand: true,
+                    ),
+                  ],
+                )
+              else
+                Column(
+                  children: [
+                    buildClientItem(
+                      "01.",
+                      "CyberSecurity Trends",
+                      "Protect your digital assets with insights on current threats and learn from the best defense mechanisms.",
+                      "assets/images/cybersecurity image.jpeg",
+                    ),
+                    buildClientItem(
+                      "02.",
+                      "Tech Guides",
+                      "Stay updated on emerging technology trends to remain competitive.",
+                      "assets/images/tech guides.jpeg",
+                    ),
+                    buildClientItem(
+                      "03.",
+                      "IT Career Advice",
+                      "Discover strategies to grow your IT career with expert guidance and advice.",
+                      "assets/images/itcareer.webp",
+                    ),
+                    buildClientItem(
+                      "04.",
+                      "Cloud Computing",
+                      "Cloud innovations are transforming the tech world — adaptability is key.",
+                      "assets/images/cloud computing.png",
+                    ),
+                  ],
+                ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
