@@ -1,3 +1,4 @@
+import 'package:digitechedge/screens/projects_page_details.dart';
 import 'package:digitechedge/underline.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,15 @@ class ProjectsPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  // Navigate to projects page or perform action
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProjectsPageDetails(),
+                    ),
+                  );
+                },
                 child: Text(
                   "Browse",
                   style: TextStyle(

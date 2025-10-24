@@ -92,7 +92,7 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // 🏁 Fixed welcome message
+              //  Fixed welcome message
               Text(
                 "Welcome to DigiTech Edge",
                 textAlign: TextAlign.center,
